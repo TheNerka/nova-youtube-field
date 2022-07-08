@@ -1,11 +1,14 @@
 <template>
-    <component :is="'DefaultField'" :field="field">
+    <component :is="'DefaultField'" :field="field" :errors="errors" :show-help-text="showHelpText">
         <template #field>
-            <input :id="field.name" type="text"
+            <input
+                :id="field.name"
+                type="text"
                 class="w-full form-control form-input form-input-bordered"
-                :class="errorClasses"
-                :placeholder="field.name"
+                :disabled="isReadonly"
+                :dusk="field.attribute"
                 v-model="value"
+                v-bind="extraAttributes"
             />
 
             <p v-if="hasError" class="my-2 text-danger">
@@ -44,6 +47,33 @@ export default {
         handleChange(value) {
           this.value = value
         }
-    }
+    },
+
+    computed: {
+        defaultAttributes() {
+            return {
+                placeholder: this.field.placeholder || this.field.name,
+            }
+        },
+
+        extraAttributes() {
+            const attrs = this.field.extraAttributes
+
+            return {
+                ...this.defaultAttributes,
+                ...attrs,
+            }
+        },
+
+        hasError() {
+            return this.validationErrors.has(this.field.attribute)
+        },
+
+        firstError() {
+            if (this.hasError) {
+                return this.validationErrors.first(this.field.attribute)
+            }
+        }
+    },
 }
 </script>
