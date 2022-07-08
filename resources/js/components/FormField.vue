@@ -1,6 +1,6 @@
 <template>
-    <default-field :field="field">
-        <template slot="field">
+    <component :is="'DefaultField'" :field="field">
+        <template #field>
             <input :id="field.name" type="text"
                 class="w-full form-control form-input form-input-bordered"
                 :class="errorClasses"
@@ -12,7 +12,7 @@
                 {{ firstError }}
             </p>
         </template>
-    </default-field>
+    </component>
 </template>
 
 <script>
