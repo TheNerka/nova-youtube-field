@@ -1,12 +1,11 @@
 <template>
-    <panel-item :field="field">
-        {{field}}
+    <PanelItem :field="field">
         <template v-if="field.value" #value>
             <iframe id="ytplayer" type="text/html" width="640" height="360"
                     :src="'https://www.youtube.com/embed/' + field.value"
                     frameborder="0"></iframe>
         </template>
-    </panel-item>
+    </PanelItem>
 </template>
 
 <script>
