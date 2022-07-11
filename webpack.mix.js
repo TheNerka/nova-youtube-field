@@ -1,13 +1,10 @@
-const mix = require('laravel-mix');
-const path = require('path');
+let mix = require('laravel-mix')
 
-require('./nova.mix');
+require('./nova.mix')
 
-mix.setPublicPath('dist')
-    .js('resources/js/field.js', 'js')
-    .vue({ version: 3 })
-    .alias({
-        'laravel-nova': path.join(__dirname, 'vendor/laravel/nova/resources/js/mixins/packages.js'),
-        '@': path.join(__dirname, 'resources/js/'),
-    })
-    .sass('resources/sass/field.scss', 'css')
+mix
+  .setPublicPath('dist')
+  .js('resources/js/field.js', 'js')
+  .vue({ version: 3 })
+  .css('resources/css/field.css', 'css')
+  .nova('media24si/nova-youtube-field')
